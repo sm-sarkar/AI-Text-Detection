@@ -1,1 +1,1 @@
-# resume-app
+# AI Text Detection WebApp
