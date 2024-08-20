@@ -12,7 +12,7 @@ load_dotenv()
 # Set environment variables (uncomment if needed)
 # os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 os.environ["LANGCHAIN_TRACING_V2"] = "true"
-os.environ["LANGCHAIN_API_KEY"] = "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"
+os.environ["LANGCHAIN_API_KEY"] = "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"
 
 # Prompt template with a better structure
 prompt = ChatPromptTemplate.from_messages(
