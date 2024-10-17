@@ -12,6 +12,7 @@ load_dotenv()
 
 # Set environment variables (uncomment if needed)
 # os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
+genai.configure(api_key="AIzaSyD4Ovc8xVvnPKz5f1DI5sBE6lWN42vxV0c")
 os.environ["LANGCHAIN_TRACING_V2"] = "true"
 os.environ["LANGCHAIN_API_KEY"] = "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"
 
@@ -54,11 +55,15 @@ st.title('AI Text Detection')
 input_text = st.text_input("Enter the text.")
 
 # Llama LLM setup
-llm = Ollama(model="llama2")
-output_parser = StrOutputParser()
-chain = prompt | llm | output_parser
+# llm = Ollama(model="llama2")
+# output_parser = StrOutputParser()
+# chain = prompt | llm | output_parser
 
 # Process input and display output
 if input_text:
-    response = chain.invoke({"question": input_text})
+    # response = chain.invoke({"question": input_text})
+    # st.write(response)
+
+    response=get_gemini_repsonse(prompt,input)
+    st.subheader("The Response is")
     st.write(response)
