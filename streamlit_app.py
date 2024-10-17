@@ -5,6 +5,7 @@ from langchain_community.llms import Ollama
 import streamlit as st
 import os
 from dotenv import load_dotenv
+import google.generativeai as genai
 
 # Load environment variables
 load_dotenv()
@@ -14,6 +15,11 @@ load_dotenv()
 os.environ["LANGCHAIN_TRACING_V2"] = "true"
 os.environ["LANGCHAIN_API_KEY"] = "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"
 
+def get_gemini_repsonse(input,prompt):
+    model=genai.GenerativeModel('gemini-1.5-pro')
+    response=model.generate_content([input,prompt])
+    return response.text
+    
 # Prompt template with a better structure
 prompt = ChatPromptTemplate.from_messages(
     [("system", 'You are an advanced AI language model, specializing in text analysis and natural language processing.'
