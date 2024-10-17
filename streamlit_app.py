@@ -7,6 +7,7 @@ import os
 from dotenv import load_dotenv
 import google.generativeai as genai
 
+image_input = ""
 # Load environment variables
 load_dotenv()
 
@@ -91,6 +92,6 @@ if input_text:
     # response = chain.invoke({"question": input_text})
     # st.write(response)
 
-    response=get_gemini_repsonse(prompt,input)
+    response=get_gemini_repsonse(prompt,image_input,input)
     st.subheader("The Response is")
     st.write(response)
