@@ -7,7 +7,7 @@ import os
 from dotenv import load_dotenv
 import google.generativeai as genai
 
-image_input = " "
+image_input = {"Key" : 0}
 # Load environment variables
 load_dotenv()
 
