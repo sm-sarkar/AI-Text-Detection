@@ -102,7 +102,7 @@ uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png
 image_input = ""   
 if uploaded_file is not None:
     image_input = Image.open(uploaded_file)
-    st.image(image, caption="Uploaded Image.", use_column_width=True)
+    st.image(image_input, caption="Uploaded Image.", use_column_width=True)
 
 submit=st.button("Detect for AI generated content.")
 
