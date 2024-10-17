@@ -18,9 +18,9 @@ genai.configure(api_key="AIzaSyD4Ovc8xVvnPKz5f1DI5sBE6lWN42vxV0c")
 # os.environ["LANGCHAIN_TRACING_V2"] = "true"
 # os.environ["LANGCHAIN_API_KEY"] = "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"
 
-def get_gemini_repsonse(input,prompt):
+def get_gemini_repsonse(input,image,prompt):
     model=genai.GenerativeModel('gemini-1.5-pro-latest')
-    response=model.generate_content(input,prompt)
+    response=model.generate_content([input,image[0],prompt])
     return response.text
     
 # Prompt template with a better structure
