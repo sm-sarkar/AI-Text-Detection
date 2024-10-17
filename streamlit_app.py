@@ -5,9 +5,9 @@
 import streamlit as st
 import os
 from dotenv import load_dotenv
+from PIL import Image
 import google.generativeai as genai
 
-image_input = {"Key" : 0}
 # Load environment variables
 load_dotenv()
 
@@ -21,8 +21,25 @@ genai.configure(api_key="AIzaSyD4Ovc8xVvnPKz5f1DI5sBE6lWN42vxV0c")
 
 def get_gemini_repsonse(input,image,prompt):
     model=genai.GenerativeModel('gemini-1.5-pro-latest')
-    response=model.generate_content([input,image,prompt])
+    response=model.generate_content([input,image[0],prompt])
     return response.text
+
+def input_image_setup(uploaded_file):
+    # Check if a file has been uploaded
+    if uploaded_file is not None:
+        # Read the file into bytes
+        bytes_data = uploaded_file.getvalue()
+
+        image_parts = [
+            {
+                "mime_type": uploaded_file.type,  # Get the mime type of the uploaded file
+                "data": bytes_data
+            }
+        ]
+        return image_parts
+    else:
+        raise FileNotFoundError("No file uploaded")
+    
     
 # Prompt template with a better structure
 # prompt = ChatPromptTemplate.from_messages(
@@ -81,6 +98,13 @@ prompt = """ 'You are an advanced AI language model, specializing in text analys
 # Streamlit framework setup
 st.title('AI Text Detection')
 input_text = st.text_input("Enter the text.")
+uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
+image_input = ""   
+if uploaded_file is not None:
+    image_input = Image.open(uploaded_file)
+    st.image(image, caption="Uploaded Image.", use_column_width=True)
+
+submit=st.button("Detect for AI generated content.")
 
 # Llama LLM setup
 # llm = Ollama(model="llama2")
@@ -88,7 +112,7 @@ input_text = st.text_input("Enter the text.")
 # chain = prompt | llm | output_parser
 
 # Process input and display output
-if input_text:
+if submit:
     # response = chain.invoke({"question": input_text})
     # st.write(response)
 
